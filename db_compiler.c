@@ -14,7 +14,7 @@
 #include "db_vmdebug.h"
 #include "db_vm.h"
 
-#define DEBUG
+//#define DEBUG
 
 /* local function prototypes */
 static void EnterBuiltInSymbols(ParseContext *c);
