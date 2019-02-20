@@ -28,7 +28,7 @@ char *VM_getline(char *buf, int size)
 #endif
                 VM_putchar(' ');
                 VM_putchar('\b');
-                fflush(stdout);
+                VM_flush();
                 --i;
             }
         }
@@ -36,7 +36,7 @@ char *VM_getline(char *buf, int size)
             buf[i++] = ch;
 #ifdef ECHO_INPUT
             VM_putchar(ch);
-            fflush(stdout);
+            VM_flush();
 #endif
         }
     }

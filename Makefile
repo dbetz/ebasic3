@@ -33,11 +33,13 @@ db_vmdebug.h
 SPIN=\
 ebasic_vm.spin
 
-ebasic:	$(SRCS) $(PROPSRCS) $(HDRS)
-	fastspin -o $@ -2 -D PROPELLER -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS)
+CFLAGS=-D PROPELLER -D LINE_EDIT
+
+ebasic:	$(SRCS) $(PROPSRCS) fastspin_stuff.c $(HDRS)
+	fastspin -o $@ -2 $(CFLAGS) -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) fastspin_stuff.c
 
 eb_p2gcc:	$(SRCS) $(PROPSRCS) $(HDRS)
-	p2gcc -o $@ -D PROPELLER -D LINE_EDIT -D ECHO_INPUT $(SRCS) $(PROPSRCS)
+	p2gcc -o $@ $(CFLAGS) $(SRCS) $(PROPSRCS)
 
 eb_mac:	$(SRCS) $(POSIXSRCS) $(HDRS)
 	cc -Wall -o $@ -D MAC $(SRCS) $(POSIXSRCS)
