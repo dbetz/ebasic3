@@ -49,7 +49,6 @@ void EditWorkspace(System *sys, UserCmd *userCmds, Handler *evalHandler, void *c
     int lineNumber;
     char *token;
 
-    VM_printf("Entering the editor\n");
     BufInit();
     
     while (GetLine(sys)) {

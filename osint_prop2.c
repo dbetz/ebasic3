@@ -61,11 +61,16 @@ void VM_flush(void)
 
 int VM_getchar(void)
 {
-    return getchar();
+    int ch = getch();
+    if (ch == '\r')
+        ch = '\n';
+    return ch;
 }
 
 void VM_putchar(int ch)
 {
+    if (ch == '\n')
+        putchar('\r');
     putchar(ch);
 }
 
