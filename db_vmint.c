@@ -12,7 +12,7 @@
 #include "db_vm.h"
 #include "db_vmdebug.h"
 
-//#define DEBUG
+#define DEBUG
 
 #define MIN_STACK_SIZE  128
 
@@ -85,7 +85,7 @@ int Execute(System *sys, ImageHdr *image, VMVALUE main)
     i->sp = i->fp = i->stackTop;
     i->linePos = 0;
 
-    if (setjmp(i->errorTarget))
+    if (setjmp(sys->errorTarget))
         return VMFALSE;
 
     for (;;) {

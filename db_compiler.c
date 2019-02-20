@@ -14,7 +14,7 @@
 #include "db_vmdebug.h"
 #include "db_vm.h"
 
-//#define DEBUG
+#define DEBUG
 
 /* local function prototypes */
 static void EnterBuiltInSymbols(ParseContext *c);
@@ -43,7 +43,7 @@ VMVALUE Compile(System *sys, ImageHdr *image, int oneStatement)
     c->image = image;
     
     /* setup an error target */
-    if (setjmp(c->errorTarget) != 0)
+    if (setjmp(c->sys->errorTarget) != 0)
         return NIL;
 
     /* clear the runtime space */
