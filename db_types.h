@@ -33,7 +33,7 @@
 /* WIN32 */
 /*********/
 
-#ifdef WIN32
+#if defined(WIN32)
 
 #include "db_inttypes.h"
 
@@ -53,13 +53,34 @@ typedef uint32_t VMUVALUE;
 
 #define ANSI_FILE_IO
 
-#endif  // WIN32
+/*******/
+/* MAC */
+/*******/
 
-/*****************/
-/* MAC and LINUX */
-/*****************/
+#elif defined(MAC)
 
-#if defined(MAC) || defined(LINUX)
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+typedef int64_t VMVALUE;
+typedef uint64_t VMUVALUE;
+
+#define ALIGN_MASK              3
+
+#define FLASH_SPACE
+#define DATA_SPACE
+
+#define VMCODEBYTE(p)           *(uint8_t *)(p)
+#define VMINTRINSIC(i)          Intrinsics[i]
+
+#define ANSI_FILE_IO
+
+/*********/
+/* LINUX */
+/*********/
+
+#elif defined(LINUX)
 
 #include <stdio.h>
 #include <stdint.h>

@@ -42,6 +42,9 @@ eb_p2gcc:	$(SRCS) $(PROPSRCS) $(HDRS)
 eb_mac:	$(SRCS) $(POSIXSRCS) $(HDRS)
 	cc -Wall -o $@ -D MAC $(SRCS) $(POSIXSRCS)
 
+eb_linux:	$(SRCS) $(POSIXSRCS) $(HDRS)
+	cc -Wall -o $@ -D LINUX $(SRCS) $(POSIXSRCS)
+
 zip:	$(SRCS) Makefile
 	rm -f ebasic3.zip
 	zip ebasic3 README.txt count.bas $(SRCS) $(PROPSRCS) $(POSIXSRCS) $(HDRS) $(SPIN) Makefile
