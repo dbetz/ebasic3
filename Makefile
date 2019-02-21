@@ -38,6 +38,9 @@ CFLAGS=-D PROPELLER -D LINE_EDIT
 ebasic:	$(SRCS) $(PROPSRCS) fastspin_stuff.c $(HDRS)
 	fastspin -o $@ -2 $(CFLAGS) -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) fastspin_stuff.c
 
+eb_p1:	$(SRCS) $(PROPSRCS) fastspin_stuff.c $(HDRS)
+	propeller-elf-gcc -o $@ -mxmmc -Os $(CFLAGS) -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) fastspin_stuff.c
+
 eb_p2gcc:	$(SRCS) $(PROPSRCS) $(HDRS)
 	p2gcc -o $@ $(CFLAGS) $(SRCS) $(PROPSRCS)
 
