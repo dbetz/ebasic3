@@ -43,7 +43,7 @@ eb_p1:	$(SRCS) $(PROPSRCS) propgcc_stuff.c $(HDRS)
 	propeller-elf-gcc -o $@ -mxmmc -Os -D PROPELLER -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) propgcc_stuff.c
 
 eb_p2gcc:	$(SRCS) $(PROPSRCS) $(HDRS)
-	p2gcc -o $@ -D PROPELLER -D LINE_EDIT -D ECHO_INPUT $(SRCS) $(PROPSRCS)
+	p2gcc -o $@ -D PROPELLER -D LINE_EDIT -D ECHO_INPUT -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS)
 
 eb_mac:	$(SRCS) $(POSIXSRCS) $(HDRS)
 	cc -Wall -o $@ -D MAC $(SRCS) $(POSIXSRCS)
