@@ -623,7 +623,7 @@ void ParseError(ParseContext *c, const char *fmt, ...)
 
     /* show the context */
     VM_printf("  line %d\n", c->lineNumber);
-    VM_printf("    %s\n", c->sys->lineBuf);
+    VM_printf("    %s", c->sys->lineBuf);
     VM_printf("    %*s^\n", c->tokenOffset, "");
 
     /* exit until we fix the compiler so it can recover from parse errors */
