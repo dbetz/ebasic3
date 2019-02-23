@@ -25,6 +25,9 @@ char *VM_getline(char *buf, int size)
             if (i > 0) {
 #ifdef ECHO_INPUT
                 VM_putchar('\b');
+#else
+                if (ch == 0x7f)
+                    VM_putchar('\b');
 #endif
                 VM_putchar(' ');
                 VM_putchar('\b');
@@ -72,14 +75,6 @@ void VM_putchar(int ch)
     if (ch == '\n')
         putchar('\r');
     putchar(ch);
-}
-
-void LOG_printf(const char *fmt, ...)
-{
-    va_list ap;
-    va_start(ap, fmt);
-    VM_vprintf(fmt, ap);
-    va_end(ap);
 }
 
 int strcasecmp(const char *s1, const char *s2)

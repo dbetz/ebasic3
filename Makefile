@@ -33,16 +33,17 @@ db_vmdebug.h
 SPIN=\
 ebasic_vm.spin
 
-CFLAGS=-D PROPELLER -D LINE_EDIT
-
 ebasic:	$(SRCS) $(PROPSRCS) fastspin_stuff.c $(HDRS)
-	fastspin -o $@ -2 $(CFLAGS) -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) fastspin_stuff.c
+	fastspin -o $@ -2 -D PROPELLER -D LINE_EDIT -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) fastspin_stuff.c
 
-eb_p1:	$(SRCS) $(PROPSRCS) fastspin_stuff.c $(HDRS)
-	propeller-elf-gcc -o $@ -mxmmc -Os $(CFLAGS) -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) fastspin_stuff.c
+run:	ebasic
+	loadp2 ebasic -t -p $(PORT) -b 115200 -CHIP
+
+eb_p1:	$(SRCS) $(PROPSRCS) propgcc_stuff.c $(HDRS)
+	propeller-elf-gcc -o $@ -mxmmc -Os -D PROPELLER -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) propgcc_stuff.c
 
 eb_p2gcc:	$(SRCS) $(PROPSRCS) $(HDRS)
-	p2gcc -o $@ $(CFLAGS) $(SRCS) $(PROPSRCS)
+	p2gcc -o $@ -D PROPELLER -D LINE_EDIT -D ECHO_INPUT $(SRCS) $(PROPSRCS)
 
 eb_mac:	$(SRCS) $(POSIXSRCS) $(HDRS)
 	cc -Wall -o $@ -D MAC $(SRCS) $(POSIXSRCS)
@@ -55,4 +56,4 @@ zip:	$(SRCS) Makefile
 	zip ebasic3 README.txt count.bas $(SRCS) $(PROPSRCS) $(POSIXSRCS) $(HDRS) $(SPIN) Makefile
 
 clean:
-	rm -f ebasic eb_p2gcc eb_mac *.o
+	rm -f ebasic eb_p1 eb_p2gcc eb_mac *.o

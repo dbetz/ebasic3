@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     System *sys;
     
     sleep(1);
-    VM_printf("ebasic3\n");
+    VM_printf("ebasic3 v0.01\n");
 
     VM_sysinit(argc, argv);
 

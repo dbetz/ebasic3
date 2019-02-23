@@ -1,11 +1,16 @@
 #include <stdio.h>
+#include <propeller.h>
 
 int getch(void)
 {
-    return getchar();
+    int ch = getchar();
+    if (ch == '\r')
+        putchar('\n');
+    return ch;
 }
 
 void sleep(int secs)
 {
+    waitcnt(getcnt() + clkfreq * secs);
 }
 

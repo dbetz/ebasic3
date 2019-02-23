@@ -8,7 +8,7 @@ typedef struct {
 } Line;
 
 static DATA_SPACE uint8_t buffer[EDITBUFSIZE];
-static uint8_t *bufferMax = &buffer[0] + sizeof(buffer);
+static uint8_t *bufferMax = buffer + sizeof(buffer);
 static uint8_t *bufferTop = buffer;
 static Line *current = (Line *)buffer;
 
