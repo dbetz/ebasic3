@@ -87,7 +87,7 @@ int GetToken(ParseContext *c)
     /* check for a saved token */
     if ((tkn = c->savedToken) != T_NONE)
         c->savedToken = T_NONE;
-
+    
     /* otherwise, get the next token */
     else
         tkn = GetToken1(c);
@@ -217,7 +217,7 @@ static int GetToken1(ParseContext *c)
     ch = SkipSpaces(c);
 
     /* remember the start of the current token */
-    c->tokenOffset = (int)(c->sys->linePtr - &c->sys->lineBuf[0]);
+    c->tokenOffset = (int)(c->sys->linePtr - c->sys->lineBuf);
 
     /* check the next character */
     switch (ch) {

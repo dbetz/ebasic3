@@ -43,11 +43,6 @@
 typedef int32_t VMVALUE;
 typedef uint32_t VMUVALUE;
 
-#define ALIGN_MASK              3
-
-#define FLASH_SPACE
-#define DATA_SPACE
-
 #define VMCODEBYTE(p)           *(uint8_t *)(p)
 #define VMINTRINSIC(i)          Intrinsics[i]
 
@@ -65,11 +60,6 @@ typedef uint32_t VMUVALUE;
 
 typedef int64_t VMVALUE;
 typedef uint64_t VMUVALUE;
-
-#define ALIGN_MASK              3
-
-#define FLASH_SPACE
-#define DATA_SPACE
 
 #define VMCODEBYTE(p)           *(uint8_t *)(p)
 #define VMINTRINSIC(i)          Intrinsics[i]
@@ -89,11 +79,6 @@ typedef uint64_t VMUVALUE;
 typedef int64_t VMVALUE;
 typedef uint64_t VMUVALUE;
 
-#define ALIGN_MASK              3
-
-#define FLASH_SPACE
-#define DATA_SPACE
-
 #define VMCODEBYTE(p)           *(uint8_t *)(p)
 #define VMINTRINSIC(i)          Intrinsics[i]
 
@@ -110,16 +95,11 @@ typedef uint64_t VMUVALUE;
 
 int strcasecmp(const char *s1, const char *s2);
 
-#define FLASH_SPACE
-#define DATA_SPACE
-
 #define VMCODEBYTE(p)           *(uint8_t *)(p)
 #define VMINTRINSIC(i)          Intrinsics[i]
 
 typedef int32_t VMVALUE;
 typedef uint32_t VMUVALUE;
-
-#define ALIGN_MASK              3
 
 //#define ANSI_FILE_IO
 
@@ -128,6 +108,8 @@ typedef uint32_t VMUVALUE;
 #error Must define MAC, LINUX, or PROPELLER
 
 #endif
+
+#define ALIGN_MASK  (sizeof(VMVALUE) - 1)
 
 /****************/
 /* ANSI_FILE_IO */

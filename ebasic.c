@@ -4,13 +4,13 @@
 #include "db_vm.h"
 #include "db_edit.h"
 
-static DATA_SPACE uint8_t space[HEAPSIZE];
+static uint8_t space[HEAPSIZE];
 
 /* command handlers */
 static void DoRun(void *cookie);
 
 /* command table */
-UserCmd userCmds[] = {
+static UserCmd userCmds[] = {
 {   "RUN",      DoRun   },
 {   NULL,       NULL    }
 };

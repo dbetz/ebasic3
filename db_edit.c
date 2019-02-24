@@ -36,7 +36,7 @@ static void DoList(System *sys);
 
 /* memory of the last filename */
 #ifdef LOAD_SAVE
-static DATA_SPACE char programName[MAX_PROG_NAME] = "";
+static char programName[MAX_PROG_NAME] = "";
 #endif
 
 /* prototypes */

@@ -813,7 +813,7 @@ static void ParseAsm(ParseContext *c)
 /* Assemble - assemble a single line */
 static void Assemble(ParseContext *c, char *name)
 {
-    FLASH_SPACE OTDEF *def;
+    OTDEF *def;
     
     /* lookup the opcode */
     for (def = OpcodeTable; def->name != NULL; ++def)
