@@ -110,6 +110,7 @@ VMVALUE Compile(System *sys, ImageHdr *image, int oneStatement)
     {
         int objectDataSize = (uint8_t *)image->free - (uint8_t *)c->image;
         DumpSymbols(&c->globals, "symbols");
+        DumpStrings(c);
         VM_printf("Heap: %d, Image: %d\n", c->maxHeapUsed, objectDataSize);
     }
 #endif
@@ -290,7 +291,7 @@ VMVALUE StoreCode(ParseContext *c)
     InitSymbolTable(&c->arguments);
     InitSymbolTable(&c->locals);
     c->labels = NULL;
-
+    
     /* reset to compile the next code */
     c->codeType = CODE_TYPE_MAIN;
     
@@ -334,6 +335,15 @@ String *AddString(ParseContext *c, const char *value)
 
     /* return the string table entry */
     return str;
+}
+
+/* DumpStrings - dump the string table */
+void DumpStrings(ParseContext *c)
+{
+    String *str;
+    VM_printf("strings:\n");
+    for (str = c->strings; str != NULL; str = str->next)
+        VM_printf("  '%s' %08x\n", str->data, str->value);
 }
 
 /* AddStringRef - add a reference to a string */
@@ -383,11 +393,10 @@ static void PlaceSymbols(ParseContext *c)
 /* GlobalAlloc - allocate memory from the global heap */
 void *GlobalAlloc(ParseContext *c, size_t size)
 {
-    void *p;
+    void *p = c->nextGlobal;
     size = (size + ALIGN_MASK) & ~ALIGN_MASK;
-    if (c->nextGlobal + size > c->nextLocal)
+    if (p + size > c->nextLocal)
         Abort(c->sys, "insufficient memory");
-    p = c->nextGlobal;
     c->nextGlobal += size;
     if (c->heapSize - (c->nextLocal - c->nextGlobal) > c->maxHeapUsed)
         c->maxHeapUsed = c->heapSize - (c->nextLocal - c->nextGlobal);
@@ -398,7 +407,7 @@ void *GlobalAlloc(ParseContext *c, size_t size)
 void *LocalAlloc(ParseContext *c, size_t size)
 {
     size = (size + ALIGN_MASK) & ~ALIGN_MASK;
-    if (c->nextLocal + size < c->nextGlobal)
+    if (c->nextLocal - size < c->nextGlobal)
         Abort(c->sys, "insufficient memory");
     c->nextLocal -= size;
     if (c->heapSize - (c->nextLocal - c->nextGlobal) > c->maxHeapUsed)

@@ -26,7 +26,7 @@ void InitImage(ImageHdr *image)
     image->top = (VMVALUE *)((uint8_t *)image + image->size);
 }
 
-/* StoreVector - store a vector */
+/* StoreVector - store a VMVALUE vector */
 VMVALUE StoreVector(ImageHdr *image, const VMVALUE *buf, int size)
 {
     VMVALUE addr = (VMVALUE)image->free;

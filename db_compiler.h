@@ -281,6 +281,7 @@ void StartCode(ParseContext *c, CodeType type);
 VMVALUE StoreCode(ParseContext *c);
 void AddIntrinsic(ParseContext *c, const char *name, int index);
 String *AddString(ParseContext *c, const char *value);
+void DumpStrings(ParseContext *c);
 VMVALUE AddStringRef(String *str, int offset);
 VMVALUE AddSymbolRef(Symbol *sym, int offset);
 void *GlobalAlloc(ParseContext *c, size_t size);
