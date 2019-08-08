@@ -11,6 +11,6 @@ int getch(void)
 
 void sleep(int secs)
 {
-    waitcnt(getcnt() + clkfreq * secs);
+    _waitx(_clockfreq() * secs);
 }
 
