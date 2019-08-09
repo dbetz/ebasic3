@@ -33,22 +33,22 @@ db_vmdebug.h
 SPIN=\
 ebasic_vm.spin
 
-ebasic:	$(SRCS) $(PROPSRCS) fastspin_stuff.c $(HDRS)
+ebasic:	$(SRCS) $(PROPSRCS) fastspin_stuff.c $(HDRS) Makefile
 	fastspin -o $@ -2 -D PROPELLER -D LINE_EDIT -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) fastspin_stuff.c
 
 run:	ebasic
 	loadp2 ebasic -t -p $(PORT) -b 115200 -CHIP
 
-eb_p1:	$(SRCS) $(PROPSRCS) propgcc_stuff.c $(HDRS)
+eb_p1:	$(SRCS) $(PROPSRCS) propgcc_stuff.c $(HDRS) Makefile
 	propeller-elf-gcc -o $@ -mxmmc -Os -D PROPELLER -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS) propgcc_stuff.c
 
-eb_p2gcc:	$(SRCS) $(PROPSRCS) $(HDRS)
+eb_p2gcc:	$(SRCS) $(PROPSRCS) $(HDRS) Makefile
 	p2gcc -o $@ -D PROPELLER -D LINE_EDIT -D ECHO_INPUT -D vsprintf=__simple_vsprintf $(SRCS) $(PROPSRCS)
 
-eb_mac:	$(SRCS) $(POSIXSRCS) $(HDRS)
+eb_mac:	$(SRCS) $(POSIXSRCS) $(HDRS) Makefile
 	cc -Wall -o $@ -D MAC $(SRCS) $(POSIXSRCS)
 
-eb_linux:	$(SRCS) $(POSIXSRCS) $(HDRS)
+eb_linux:	$(SRCS) $(POSIXSRCS) $(HDRS) Makefile
 	cc -Wall -o $@ -D LINUX $(SRCS) $(POSIXSRCS)
 
 zip:	$(SRCS) Makefile

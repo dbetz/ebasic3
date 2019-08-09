@@ -194,7 +194,7 @@ static void DoList(System *sys)
     int lineNumber;
     BufSeekN(0);
     while (BufGetLine(&lineNumber, sys->lineBuf))
-        VM_printf("%d %s", lineNumber, sys->lineBuf);
+        VM_printf("%d%s", lineNumber, sys->lineBuf);
 }
 
 static char *NextToken(System *sys)

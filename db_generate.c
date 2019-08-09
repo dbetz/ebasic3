@@ -135,8 +135,9 @@ static void code_call(ParseContext *c, ParseTreeNode *expr, PVAL *pv)
     ExprListEntry *arg;
 
     /* code each argument expression */
-    for (arg = expr->u.functionCall.args; arg != NULL; arg = arg->next)
+    for (arg = expr->u.functionCall.args; arg != NULL; arg = arg->next) {
         code_rvalue(c, arg->expr);
+    }
 
     /* call the function */
     code_rvalue(c, expr->u.functionCall.fcn);

@@ -376,7 +376,7 @@ ParseTreeNode *ParsePrimary(ParseContext *c)
     ParseTreeNode *node;
     int tkn;
     node = ParseSimplePrimary(c);
-    while ((tkn = GetToken(c)) == '(' || tkn == '[' || tkn == '.') {
+    while ((tkn = GetToken(c)) == '(' || tkn == '[') {
         switch (tkn) {
         case '[':
             node = ParseArrayReference(c, node);
