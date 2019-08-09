@@ -56,4 +56,4 @@ zip:	$(SRCS) Makefile
 	zip ebasic3 README.txt count.bas $(SRCS) $(PROPSRCS) $(POSIXSRCS) $(HDRS) $(SPIN) Makefile
 
 clean:
-	rm -f ebasic eb_p1 eb_p2gcc eb_mac *.o
+	rm -f ebasic ebasic.p2asm eb_p1 eb_p2gcc eb_mac *.o *.elf
